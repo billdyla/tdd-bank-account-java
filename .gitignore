@@ -12,3 +12,6 @@ target/
 # gradle
 .gradle/
 build/
+
+__pycache__
+*swp
