@@ -24,7 +24,7 @@ class Account_Test(TestCase):
         acct = AccountFactory.getAccount().transact(10)
         self.assertTrue(acct.last_transaction_dt is not None)
 
-    def test_statement(self):
+    def test_transactions(self):
 
         acct = AccountFactory.getAccount().transact(10).transact(-5)
         self.assertEqual(len(acct.transactions), 2)
@@ -33,3 +33,10 @@ class Account_Test(TestCase):
 
         acct = AccountFactory.getAccount().transact(10).transact(-5)
         self.assertEqual(len(list(filter(lambda x: x[1] > 0, acct.transactions))), 1)
+
+    def test_statement(self):
+
+        acct = AccountFactory.getAccount().transact(10).transact(-5)
+        for i in acct.transactions:
+            print(i)
+        self.assertEqual(len(list(acct.current_statement())), 2)
